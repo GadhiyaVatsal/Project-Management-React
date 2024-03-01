@@ -1,6 +1,25 @@
+import { useRef } from "react";
 import Input from "./Input";
 
 export default function NewProject() {
+  const title = useRef();
+  const description = useRef();
+  const dueDate = useRef();
+
+  function handleSave() {
+    const enteredTitle = title.current.value;
+    const enteredDescription = description.current.value;
+    const enteredDueDate = dueDate.current.value;
+
+    // validation ...
+
+    onAdd({
+      title: enteredTitle,
+      description: enteredDescription,
+      dueDate: enteredDueDate,
+    });
+  }
+
   return (
     <div className="w-[35rem] mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
@@ -16,9 +35,9 @@ export default function NewProject() {
         </li>
       </menu>
       <div>
-        <Input label="Title" />
-        <Input label="Description" textArea />
-        <Input label="Due Date" />
+        <Input type="text" ref={title} label="Title" />
+        <Input ref={description} label="Description" textArea />
+        <Input type="date" ref={dueDate} label="Due Date" />
       </div>
     </div>
   );
